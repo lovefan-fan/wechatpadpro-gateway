@@ -6,5 +6,6 @@ services:
     environment:
       - WECHATPADPRO_DOMAIN=你的域名
       - WECHATPADPRO_KEY=你的key
+      - API_TOKEN=你的安全token
     ports:
       - "8000:8000" 

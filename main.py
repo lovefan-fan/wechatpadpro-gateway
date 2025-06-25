@@ -8,6 +8,7 @@ app = FastAPI()
 class Settings(BaseSettings):
     WECHATPADPRO_DOMAIN: str
     WECHATPADPRO_KEY: str
+    API_TOKEN: str
 
     class Config:
         env_file = ".env"  # 可选，支持本地开发
@@ -15,7 +16,9 @@ class Settings(BaseSettings):
 settings = Settings()
 
 @app.api_route("/{path:path}", methods=["GET", "POST", "PUT", "DELETE"])
-async def universal_proxy(request: Request, path: str):
+async def universal_proxy(request: Request, path: str, authorization: str = Header(None)):
+    if authorization != f"Bearer {settings.API_TOKEN}":
+        raise HTTPException(status_code=401, detail="无效的Token")
     # 动态拼接目标 URL（保留原始路径和查询参数）
     target_url = f"{settings.WECHATPADPRO_DOMAIN}/{path}?key={settings.WECHATPADPRO_KEY}"
     
