@@ -1,6 +1,6 @@
-from fastapi import FastAPI, Request, HTTPException
+from fastapi import FastAPI, Request, HTTPException, Header
 import httpx
-from pydantic import BaseSettings
+from pydantic_settings import BaseSettings
 
 app = FastAPI()
 
