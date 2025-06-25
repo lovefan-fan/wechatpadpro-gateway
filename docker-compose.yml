@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  wechatpadpro-gateway:
+    build: .
+    container_name: wechatpadpro-gateway
+    environment:
+      - WECHATPADPRO_DOMAIN=你的域名
+      - WECHATPADPRO_KEY=你的key
+    ports:
+      - "8000:8000" 
